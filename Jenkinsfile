@@ -14,6 +14,13 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/atenchong/maven.git'
             }
         }
+        stage ("Sonarqube scan") {
+          steps{
+            withsonarQubeEnv( 'sonar') {
+        sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=atenchong_geolocation'
+            }
+          }
+        }
         stage('Code Build') {
             steps {
                 sh 'mvn clean install package'
