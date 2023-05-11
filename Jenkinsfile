@@ -16,7 +16,7 @@ pipeline {
         }
         stage ("Sonarqube scan") {
           steps{
-            withsonarQubeEnv( 'sonar') {
+          withSonarQubeEnv( 'sonar') {
         sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=atenchong_geolocation'
             }
           }
